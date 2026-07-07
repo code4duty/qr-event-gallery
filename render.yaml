@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: qr-event-gallery
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: CLOUDINARY_URL
+        sync: false
+      - key: DATABASE_URL
+        sync: false

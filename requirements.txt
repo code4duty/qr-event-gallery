@@ -1,0 +1,7 @@
+Flask
+Pillow
+pillow-heif
+cloudinary
+psycopg2-binary
+gunicorn
+requests
