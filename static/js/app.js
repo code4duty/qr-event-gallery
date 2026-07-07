@@ -627,27 +627,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function downloadQRCodeImage() {
-        // Retrieve the generated image/canvas element inside container
-        const canvas = qrCodeContainer.querySelector('canvas');
-        const img = qrCodeContainer.querySelector('img');
-        
-        let downloadUrl = '';
-        if (canvas) {
-            downloadUrl = canvas.toDataURL("image/png");
-        } else if (img) {
-            downloadUrl = img.src;
-        }
+        // Wait a tick to ensure QR library has finished rendering
+        setTimeout(() => {
+            const canvas = qrCodeContainer.querySelector('canvas');
+            const img = qrCodeContainer.querySelector('img');
 
-        if (downloadUrl) {
-            const link = document.createElement('a');
-            link.href = downloadUrl;
-            link.download = 'memorybox_event_qr.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        } else {
-            showTemporaryAlert("Unable to download QR code. Try right-clicking the code card.");
-        }
+            // Best approach: draw onto a fresh canvas to get reliable data URL
+            if (canvas) {
+                try {
+                    const downloadUrl = canvas.toDataURL('image/png');
+                    const link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.download = 'memorybox_event_qr.png';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    return;
+                } catch(e) {
+                    console.warn('Canvas toDataURL failed:', e);
+                }
+            }
+
+            // Fallback: use img src (for browsers rendering QR as img)
+            if (img && img.src && img.src.startsWith('data:')) {
+                const link = document.createElement('a');
+                link.href = img.src;
+                link.download = 'memorybox_event_qr.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                return;
+            }
+
+            // Last resort: open in new tab so user can save manually
+            const fallback = canvas || img;
+            if (fallback) {
+                const url = canvas ? canvas.toDataURL('image/png') : img.src;
+                const win = window.open();
+                win.document.write('<img src="' + url + '" style="max-width:100%"><br><p>Right-click → Save Image As...</p>');
+            } else {
+                showTemporaryAlert('QR code not ready yet. Please wait and try again.');
+            }
+        }, 100);
     }
 
     /* ==========================================================================
