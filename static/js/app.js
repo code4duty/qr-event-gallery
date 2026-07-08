@@ -178,9 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        dropZone.addEventListener('click', () => {
-             fileInput.click();
-        });
 
         fileInput.addEventListener('change', () => {
             if (fileInput.files.length > 0) {
