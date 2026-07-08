@@ -178,12 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        dropZone.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            if (e.target !== fileInput) {
-                fileInput.click();
-            }
+        dropZone.addEventListener('click', () => {
+             fileInput.click();
         });
 
         fileInput.addEventListener('change', () => {
