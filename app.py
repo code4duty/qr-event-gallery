@@ -348,7 +348,36 @@ def admin_logout():
 def admin_check():
     is_admin = session.get('is_admin', False)
     return jsonify({'success': True, 'isAdmin': is_admin})
+@app.route('/download/<media_id>', methods=['GET'])
+def public_download(media_id):
+    row = query_db('SELECT * FROM media WHERE id = ?', (media_id,), fetchone=True)
 
+    if not row:
+        return "File not found", 404
+
+    file_path = row['file_path']
+
+    # Cloudinary
+    if file_path.startswith('http'):
+        r = requests.get(file_path, stream=True)
+        response = app.response_class(
+            r.iter_content(chunk_size=10240),
+            headers=dict(r.headers)
+        )
+        response.headers['Content-Disposition'] = (
+            f'attachment; filename="{row["original_name"]}"'
+        )
+        return response
+
+    # Local storage
+    filename = os.path.basename(file_path)
+
+    return send_from_directory(
+        app.config['UPLOAD_FOLDER'],
+        filename,
+        as_attachment=True,
+        download_name=row['original_name']
+    )
 @app.route('/api/admin/download/<media_id>', methods=['GET'])
 def admin_download(media_id):
     if not session.get('is_admin', False):
