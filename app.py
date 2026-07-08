@@ -217,7 +217,13 @@ def upload_file():
     try:
         # Save file locally temporarily to parse size and metadata
         file.save(filepath)
-        
+        print("=" * 60)
+        print("NEW UPLOAD")
+        print("Filename :", file.filename)
+        print("Content-Type :", file.content_type)
+        print("User-Agent :", request.headers.get("User-Agent"))
+        print("File Size :", os.path.getsize(filepath))
+        print("=" * 60)
         # Enforce size limits on the backend
         file_size = os.path.getsize(filepath)
         media_type = 'video' if is_video(file.filename) else 'image'
