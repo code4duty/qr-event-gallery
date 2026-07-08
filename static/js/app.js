@@ -178,8 +178,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        dropZone.addEventListener('click', () => {
-            fileInput.click();
+        dropZone.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (e.target !== fileInput) {
+                fileInput.click();
+            }
         });
 
         fileInput.addEventListener('change', () => {
@@ -421,9 +425,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         filesArray.forEach((file) => {
             // Validate File Type
-            const isImg = file.type.startsWith('image/') || file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
-            const isVid = file.type.startsWith('video/');
-            
+            const isImg =
+            file.type.startsWith('image/') ||
+            file.name.toLowerCase().endsWith('.heic') ||
+            file.name.toLowerCase().endsWith('.heif') ||
+            file.name.toLowerCase().endsWith('.jpg') ||
+            file.name.toLowerCase().endsWith('.jpeg') ||
+            file.name.toLowerCase().endsWith('.png');
+            const isVid =
+            file.type.startsWith('video/') ||
+            file.name.toLowerCase().endsWith('.mov') ||
+            file.name.toLowerCase().endsWith('.m4v') ||
+            file.name.toLowerCase().endsWith('.mp4') ||
+            file.name.toLowerCase().endsWith('.avi') ||
+            file.name.toLowerCase().endsWith('.mkv') ||
+            file.name.toLowerCase().endsWith('.webm') ||
+            file.name.toLowerCase().endsWith('.3gp') ||
+            file.name.toLowerCase().endsWith('.hevc');
             if (!isImg && !isVid) {
                 createFailedQueueItem(file.name, "Unsupported format");
                 completedCount++;
@@ -471,15 +489,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkAllUploadsDone(completed, total) {
-        if (completed === total) {
-            // Hide queue after 4 seconds and reload gallery
-            setTimeout(() => {
-                uploadQueueContainer.classList.add('hidden');
-                uploadQueueItems.innerHTML = '';
-            }, 4000);
-            loadMedia();
-        }
+    if (completed === total) {
+        // Reset file input (important for mobile browsers)
+        fileInput.value = "";
+
+        setTimeout(() => {
+            uploadQueueContainer.classList.add('hidden');
+            uploadQueueItems.innerHTML = '';
+        }, 4000);
+
+        loadMedia();
     }
+}
 
     function createQueueItemUI(id, name) {
         const item = document.createElement('div');
