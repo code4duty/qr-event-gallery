@@ -1221,21 +1221,38 @@ h1, h2, h3, h4 {
 }
 /* Engagement welcome section */
 .event-hero {
-    padding: 5.5rem 2rem;
+    position: relative;
     min-height: 430px;
+    padding: 5.5rem 2rem;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    overflow: hidden;
     text-align: center;
     border-radius: var(--border-radius-lg);
     border: 1px solid var(--card-border);
-    background:
-        linear-gradient(
-            rgba(22, 15, 22, 0.62),
-            rgba(22, 15, 22, 0.78)
-        ),
-        url('/static/images/engagement-bg.jpg') center / cover no-repeat;
     box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.35);
+}
+
+.event-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(22, 15, 22, 0.58);
+    z-index: 1;
+}
+
+.event-hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event-hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 .event-kicker {
