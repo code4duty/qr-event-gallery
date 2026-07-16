@@ -43,7 +43,10 @@
 }
 
 body {
-    background-color: var(--bg-primary);
+    background:
+    radial-gradient(circle at 12% 15%, rgba(217, 130, 157, 0.16), transparent 32%),
+    radial-gradient(circle at 88% 75%, rgba(216, 168, 90, 0.14), transparent 35%),
+    var(--bg-primary);
     color: var(--text-main);
     font-family: var(--font-body);
     line-height: 1.6;
@@ -110,7 +113,7 @@ h1, h2, h3, h4 {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(8, 6, 15, 0.7);
+    background: rgba(22, 15, 22, 0.82);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--card-border);
@@ -141,7 +144,7 @@ h1, h2, h3, h4 {
     align-items: center;
     justify-content: center;
     color: white;
-    box-shadow: 0 0 20px var(--accent-purple-glow);
+    box-shadow: 0 0 22px rgba(216, 168, 90, 0.24);
 }
 
 .logo-icon svg {
@@ -152,7 +155,7 @@ h1, h2, h3, h4 {
 .brand-text h1 {
     font-size: 1.5rem;
     line-height: 1.1;
-    background: linear-gradient(to right, #ffffff, var(--text-secondary));
+    background: linear-gradient(to right, #fff8f2, #d8a85a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -192,7 +195,7 @@ h1, h2, h3, h4 {
 .btn-primary {
     background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
     color: white;
-    box-shadow: 0 4px 15px rgba(255, 46, 147, 0.2);
+    box-shadow: 0 4px 15px rgba(216, 168, 90, 0.24);
 }
 
 .btn-primary:hover {
