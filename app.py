@@ -332,10 +332,11 @@ def upload_file():
         })
         
     except Exception as e:
-        if not CLOUDINARY_ENABLED and os.path.exists(filepath):
+        print(f"[ERROR] Upload failed: {e}", flush=True)
+        if os.path.exists(filepath):
             try:
                 os.remove(filepath)
-            except Exception:
+            except OSError:
                 pass
         return jsonify({'success': False, 'error': str(e)}), 500
 
