@@ -4,39 +4,35 @@
 
 /* Design Tokens & Custom Properties */
 :root {
-    --bg-primary: #08060f;
-    --bg-secondary: #0e0a1b;
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --card-border: rgba(255, 255, 255, 0.07);
-    --card-border-hover: rgba(139, 92, 246, 0.4);
-    
-    /* Harmonious Neon Gradients */
-    --accent-glow-1: rgba(255, 46, 147, 0.15);
-    --accent-glow-2: rgba(0, 240, 255, 0.15);
-    --accent-pink: #ff2e93;
-    --accent-cyan: #00f0ff;
-    --accent-purple: #8b5cf6;
-    --accent-purple-glow: rgba(139, 92, 246, 0.25);
-    
-    /* Text Colors */
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --text-secondary: #cbd5e1;
-    
-    /* Functional Colors */
-    --color-success: #10b981;
-    --color-danger: #ef4444;
-    --color-warning: #f59e0b;
-    
-    /* UI Dimensions */
+    --bg-primary: #160f16;
+    --bg-secondary: #24171d;
+    --card-bg: rgba(255, 248, 242, 0.06);
+    --card-border: rgba(232, 207, 192, 0.18);
+    --card-border-hover: rgba(216, 168, 90, 0.65);
+
+    --accent-glow-1: rgba(217, 130, 157, 0.20);
+    --accent-glow-2: rgba(216, 168, 90, 0.18);
+    --accent-pink: #d9829d;
+    --accent-cyan: #e8cfc0;
+    --accent-purple: #d8a85a;
+    --accent-purple-glow: rgba(216, 168, 90, 0.28);
+
+    --text-main: #fff8f2;
+    --text-muted: #cbb9b3;
+    --text-secondary: #eadbd3;
+
+    --color-success: #7fa88e;
+    --color-danger: #d76b6b;
+    --color-warning: #d8a85a;
+
     --border-radius-lg: 24px;
     --border-radius-md: 16px;
     --border-radius-sm: 8px;
     --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    --font-heading: 'Outfit', sans-serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-heading: Georgia, "Times New Roman", serif;
+    --font-body: "Plus Jakarta Sans", sans-serif;
 }
-
+    
 /* Reset and Base Styles */
 * {
     margin: 0;
