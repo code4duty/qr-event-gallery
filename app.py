@@ -263,21 +263,21 @@ def upload_file():
         if CLOUDINARY_ENABLED:
             print(f"[INFO] Uploading {file.filename} to Cloudinary...")
             # Upload to Cloudinary
-        if media_type == 'video' and file_size > 100 * 1024 * 1024:
-            upload_result = cloudinary.uploader.upload_large(
-               filepath,
-               resource_type="video",
-               folder="event_gallery",
-               public_id=file_id,
-               chunk_size=6_000_000
-            )
-       else:
-           upload_result = cloudinary.uploader.upload(
-              filepath,
-              resource_type=media_type,
-              folder="event_gallery",
-              public_id=file_id
-            )
+            if media_type == 'video' and file_size > 100 * 1024 * 1024:
+                upload_result = cloudinary.uploader.upload_large(
+                    filepath,
+                    resource_type="video",
+                    folder="event_gallery",
+                    public_id=file_id,
+                    chunk_size=6_000_000
+                )
+            else:
+                upload_result = cloudinary.uploader.upload(
+                    filepath,
+                    resource_type=media_type,
+                    folder="event_gallery",
+                    public_id=file_id
+                )
             
             db_file_path = upload_result.get('secure_url')
             
